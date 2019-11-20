@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Component } from 'react';
-import Login from './containers/Login'
+import Login from './containers/Login' 
 
 
 class App extends Component {
