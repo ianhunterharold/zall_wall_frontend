@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import Navbar from './Navbar';
 import { Grid, Image } from 'semantic-ui-react';
+import Biography from '../components/Biography'
 class Profile extends Component {
 
 
@@ -14,10 +15,12 @@ class Profile extends Component {
         <Grid celled>
           <Grid.Row>
             <Grid.Column width={4}>
-              <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
+              <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />profile headshot/name
             </Grid.Column>
             <Grid.Column width={12}>
-              <Image src='https://react.semantic-ui.com/images/wireframe/centered-paragraph.png' />
+              biography from profile component
+              <Biography />
+              {/* <Image src='https://react.semantic-ui.com/images/wireframe/centered-paragraph.png' />biography */}
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
