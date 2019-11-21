@@ -18,10 +18,11 @@ class Login extends Component {
 
   userLogin = (e) => {
     e.preventDefault()
-    this.createUser()
+    console.log("clicking on the botton")
+    this.verifyUser()
   }
 
-  createUser = () => {
+  verifyUser = () => {
     return fetch('http://localhost:3000/api/login', {
       method: 'POST',
       headers: {
@@ -33,8 +34,11 @@ class Login extends Component {
         password: this.state.password.toLowerCase()
       })
     }).then(res => res.json())
-      .then (token => localStorage.setItem('token', token.jwt))
-      .then(console.log(localStorage))
+      .then (token => {
+        this.props.history.push('/profile')
+        localStorage.setItem('token', token.jwt)
+      })
+      .catch(err => console.log(err))
   }
 
 
@@ -69,10 +73,10 @@ class Login extends Component {
           <Button color='blue' fluid size='large' type='submit'>Login</Button>
           </Segment>
         </form>
-        <Message>
+        {/* <Message>
           New? <a>Sign Up</a>   
           {/* will need pathing to signup page */}
-        </Message>
+        {/* </Message> */}
         </Grid.Column>
         </Grid>
       </div>
