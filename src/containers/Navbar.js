@@ -27,7 +27,7 @@ class Navbar extends Component {
         />
         <Menu.Menu position='right'>
         <Menu.Item>
-          <Input icon='search' placeholder='Search...'/> 
+          <Input icon='search' placeholder='Search for colleagues...'/> 
         </Menu.Item>
         <Menu.Item
           name='logout'
