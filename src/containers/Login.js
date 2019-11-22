@@ -18,7 +18,6 @@ class Login extends Component {
 
   userLogin = (e) => {
     e.preventDefault()
-    console.log("clicking on the botton")
     this.verifyUser()
   }
 
@@ -38,14 +37,21 @@ class Login extends Component {
         this.props.history.push('/profile')
         localStorage.setItem('token', token.jwt)
       })
+      .then(users => this.currentUser(users))
       .catch(err => console.log(err))
+  }
+
+  currentUser = (users) => {
+    let currentUserLoggedIn = this.props.users.find( user => user.username === this.state.username) 
+    console.log(currentUserLoggedIn)
+    this.props.captureCurrentUser(currentUserLoggedIn)
   }
 
 
   render() {
     return (
       <div>
-        <Grid textAlign='center' style={{ height: '100vh' }}  veriticalalign='midle'>
+        <Grid textAlign='center' style={{ height: '100vh' }}  veriticalalign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2'color='blue' textAlign='center'>log-in to your account</Header>
         <form size='large' onSubmit={this.userLogin}>  
