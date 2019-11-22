@@ -20,12 +20,17 @@ class Profile extends Component {
         <Grid celled>
           <Grid.Row>
             <Grid.Column width={4}>
-              <Headshot {...this.props} />
-              profile headshot/name in profile
-              <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
+              <Headshot 
+              {...this.props} 
+              currentUser={this.props.currentUser} 
+              />
             </Grid.Column>
             <Grid.Column width={12}>
-              <Biography {...this.props} users={this.props.users} currentUser={this.props.currentUser} />
+              <Biography 
+                {...this.props} 
+                users={this.props.users} 
+                currentUser={this.props.currentUser} 
+              />
               {/* <Image src='https://react.semantic-ui.com/images/wireframe/centered-paragraph.png' />biography */}
             </Grid.Column>
           </Grid.Row>
