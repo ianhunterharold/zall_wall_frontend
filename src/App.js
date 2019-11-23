@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import Login from './containers/Login' 
 import Profile from './containers/Profile';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 
-class App extends Component {
+class App extends PureComponent {
 
   state = {
-    users: [],
+    
     currentUser: {}
   }
 
@@ -17,20 +17,21 @@ class App extends Component {
     return !!localStorage.getItem('token')
   }
 
-  getAllUsers = () => {
-    fetch('http://localhost:3000/api/users')
-    .then(r=>r.json())
-    .then(allUsers=>this.setState({users: allUsers }))
-  }
-
   componentDidMount(){
-    this.getAllUsers()
+    this.rehydrateState();
+  } 
+
+  // rehydrate state is saying that everytime we refresh the page, reset state to be igual to the local storage
+
+  rehydrateState = () => {
     this.setState({currentUser: JSON.parse(localStorage.getItem('currentUser')) })
+    console.log('rehydrating myself everytime the page loads, slightly buggy not updating current user even though in state current user is there', this.currentUser)
   }
 
   captureCurrentUser = (currentUser) => {
     this.setState({currentUser: currentUser })
     localStorage.setItem('currentUser',JSON.stringify(currentUser))
+    console.log('captureCurrentUser', this.state.currentUser)
   }
 
 
@@ -43,12 +44,10 @@ class App extends Component {
           return <Login {...props} 
             captureCurrentUser={this.captureCurrentUser}
             currentUser={this.state.currentUser}
-            users={this.state.users}
             />}
           }/>
           <Route exact path='/profile' render={ (props) => {
             return <Profile 
-            users={this.state.users}
             currentUser={this.state.currentUser}
             {...props}
             />}

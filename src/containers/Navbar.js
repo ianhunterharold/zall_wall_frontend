@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { Button, Input, Menu } from 'semantic-ui-react';
+import { Input, Menu } from 'semantic-ui-react';
 
 
 class Navbar extends Component {
@@ -13,6 +13,7 @@ class Navbar extends Component {
 
   logOut = () => {
     localStorage.clear();
+    this.setState({});
     this.props.history.push('/')
   }
 

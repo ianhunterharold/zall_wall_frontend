@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
 
 class Login extends Component {
   state ={
@@ -34,18 +34,18 @@ class Login extends Component {
       })
     }).then(res => res.json())
       .then (token => {
-        this.props.history.push('/profile')
         localStorage.setItem('token', token.jwt)
+        localStorage.setItem('currentUser', JSON.stringify(token.user))
+        // this.currentUser(token.user)
+        this.props.history.push('/profile')
       })
-      .then(users => this.currentUser(users))
       .catch(err => console.log(err))
   }
 
-  currentUser = (users) => {
-    let currentUserLoggedIn = this.props.users.find( user => user.username === this.state.username) 
-    console.log(currentUserLoggedIn)
-    this.props.captureCurrentUser(currentUserLoggedIn)
-  }
+  // currentUser = (users) => {
+  //   let currentUserLoggedIn = this.props.users.find( user => user.username === this.state.username) 
+  //   this.props.captureCurrentUser(currentUserLoggedIn)
+  // }
 
 
   render() {
