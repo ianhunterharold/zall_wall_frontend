@@ -4,13 +4,8 @@ import GroupImage from '../components/GroupImage';
 
 class Group extends Component{
 
-  // componentDidMount(){
-  //   this.iterateOverGroups()
-  // }
-
   filterUserGroups = () => {
     return this.props.groups.filter( (group) => {
-    // console.log(JSON.parse(localStorage.currentUser)['id'] )
       return JSON.parse(localStorage.currentUser)['id'] === group.user_id
     })
   }

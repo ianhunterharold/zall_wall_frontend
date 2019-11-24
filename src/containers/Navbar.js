@@ -13,8 +13,8 @@ class Navbar extends Component {
 
   logOut = () => {
     localStorage.clear();
-    this.setState({});
     this.props.history.push('/')
+    window.location.reload(true); 
   }
 
 
@@ -33,8 +33,10 @@ class Navbar extends Component {
         <Menu.Item
           name='logout'
           active={this.activeItem === 'logout'}
-          onClick={this.logOut}
-        />
+          onClick={ () => {
+            this.logOut();
+          }}
+          />
         </Menu.Menu>
       </Menu>
     )

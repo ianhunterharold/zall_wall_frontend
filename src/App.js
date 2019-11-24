@@ -9,9 +9,9 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 class App extends PureComponent {
 
   state = {
-    
     currentUser: {}
   }
+
 
   loggedIn = () => {
     return !!localStorage.getItem('token')
@@ -20,6 +20,10 @@ class App extends PureComponent {
   componentDidMount(){
     this.rehydrateState();
   } 
+
+  componentWillUnmount(){
+    this.setState({});
+  }
 
   // rehydrate state is saying that everytime we refresh the page, reset state to be igual to the local storage
 
@@ -33,6 +37,7 @@ class App extends PureComponent {
     localStorage.setItem('currentUser',JSON.stringify(currentUser))
     console.log('captureCurrentUser', this.state.currentUser)
   }
+
 
 
   render(){

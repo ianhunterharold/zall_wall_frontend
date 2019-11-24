@@ -59,7 +59,9 @@ class Profile extends Component {
       // give all children components {...this.props} so that they may access 
     return(
       <div>
-        <Navbar {...this.props}/>
+        <Navbar 
+        {...this.props}
+        />
         <Grid celled>
           <Grid.Row>
             <Grid.Column width={4}>

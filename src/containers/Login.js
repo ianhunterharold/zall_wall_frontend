@@ -46,7 +46,7 @@ class Login extends Component {
   //   let currentUserLoggedIn = this.props.users.find( user => user.username === this.state.username) 
   //   this.props.captureCurrentUser(currentUserLoggedIn)
   // }
-
+  
 
   render() {
     return (
