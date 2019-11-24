@@ -1,9 +1,12 @@
 import React from 'react';
 
 const GroupImage =(props) => {
+  
+
   return (
     <div>
-      GroupImage component inside of Group itself
+     {props.group.name}
+     {props.group.group_image}
     </div>
   )
 

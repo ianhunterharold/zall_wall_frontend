@@ -1,12 +1,16 @@
 import React from 'react';
 import { Component } from 'react';
 import { Message } from 'semantic-ui-react';
-import { Button } from 'semantic-ui-react';
+// import { Button } from 'semantic-ui-react';
 
 class Biography extends Component {
 
-  // editBio =() => { will build out for stretch to edit personal bio
-  //   console.log('clicked edit')
+
+
+
+  // editBio =() => { 
+  //   console.log(this.props.currentUser)
+  //   console.log("clicking on edit bio button")
   //   // fetch('http://localhost:3000/api/users')
   // }
 
