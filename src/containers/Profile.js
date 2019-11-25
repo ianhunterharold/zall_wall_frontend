@@ -10,7 +10,6 @@ class Profile extends Component {
 
   state = {
     users:[],
-    groups:[],
     karmas:[]
   }
 
@@ -36,20 +35,12 @@ class Profile extends Component {
     .then(allKarma=> this.setState({karmas:allKarma}))
   }
 
-  getAllGroups = () => {
-    fetch('http://localhost:3000/groups',{
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-    .then(r=>r.json())
-    .then(allGroups=>this.setState({groups: allGroups}))
-  }
+
+
+
 
   componentDidMount(){
     this.getAllKarmas()
-    this.getAllGroups()
     this.getAllUsers()
   }
 
@@ -83,7 +74,6 @@ class Profile extends Component {
             <Grid.Column width={3}>
               <Group 
               {...this.props} 
-              groups={this.state.groups}
               /> 
               {/* <Image src='https://react.semantic-ui.com/images/wireframe/image.png' /> 
               <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />

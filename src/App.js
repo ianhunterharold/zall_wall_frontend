@@ -21,10 +21,6 @@ class App extends PureComponent {
     this.rehydrateState();
   } 
 
-  componentWillUnmount(){
-    this.setState({});
-  }
-
   // rehydrate state is saying that everytime we refresh the page, reset state to be igual to the local storage
 
   rehydrateState = () => {
