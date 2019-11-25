@@ -13,7 +13,7 @@ class Login extends Component {
   }
 
   loggedIn = () => {
-    console.log(!!localStorage.getItem('token'), "verifying if you log in does this function run")
+    // console.log(!!localStorage.getItem('token'), "verifying if you log in does this function run")
     return !!localStorage.getItem('token')
   }
 
@@ -37,9 +37,9 @@ class Login extends Component {
       .then (token => {
         localStorage.setItem('token', token.jwt)
         localStorage.setItem('currentUser', JSON.stringify(token.user))
-       
+        console.log(localStorage.getItem('currentUser'))
         // this.currentUser(token.user)
-        this.loggedIn(); // is this method being executed? 
+        this.loggedIn();
         this.props.history.push('/profile') //connected with nested components not rendering properly without a refresh 
       })
       .catch(err => console.log(err))

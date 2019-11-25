@@ -40,18 +40,8 @@ class Profile extends Component {
     this.getAllUsers()
   }
 
-  // componentDidUpdate(){
-  //   this.refreshPage()
-  // }
-
-  // move to component specific level
-
-  // refreshPage = () => {
-  //   window.location.reload(true)
-  // }
 
   render(){
-    //  console.log( {...this.props} )
       // give all children components {...this.props} so that they may access 
     return(
       <div>

@@ -6,8 +6,13 @@ import { Dropdown } from 'semantic-ui-react';
 class Group extends Component{
 
   state = {
-    groups: []
+    groups: [],
+    selectedGroup:[]
   }
+
+   componentDidMount(){
+      this.getAllGroups()
+    }
 
   getAllGroups = () => {
     fetch('http://localhost:3000/groups',{
@@ -17,12 +22,15 @@ class Group extends Component{
       }
     })
     .then(r=>r.json())
-    .then(allGroups=>this.setState({groups: allGroups}))
+    .then(allGroups=> {
+      console.log(allGroups)
+      this.setState({groups: allGroups})
+    })
   }
 
   filterUserGroups = () => {
-    // console.log(this.state.groups)
-      return this.state.groups.filter( (group) => {
+    const convertedObjectIntoArrayOfValues = Object.values(this.state.groups)
+      return convertedObjectIntoArrayOfValues.filter( (group) => {
       return JSON.parse(localStorage.currentUser)['id'] === group.user_id;
     })
   }
@@ -39,21 +47,7 @@ class Group extends Component{
     })
   }
 
-  joinGroup = (value) =>{
-    console.log("did I select a group",value)
-  }
-
-
-
-
-
-
-   //removeSelfFromGroup = (e, id) => {
-  // this.deleteGroup(id)
-  // }
-  //unauhorized error, removing from state but not from backend...unauthorized 401
   removeSelfFromGroup = (e, id) => {
-    console.log(" Have I clicked this button?",e, id)
     fetch(`http://localhost:3000/groups/${id}`, {
       method: 'DELETE',
       headers: {
@@ -65,36 +59,68 @@ class Group extends Component{
     })
     .catch(err => console.log(err))
   }
-// }
-  
-    deleteGroup = (id) => {
-       let newGroups = this.state.groups.filter( (group) => {
-          return group.id !== id
-        })
-        this.setState({
-          groups: newGroups
-        })
-    }
 
+  deleteGroup = (id) => {
+      let newGroups = this.state.groups.filter( (group) => {
+        return group.id !== id
+      })
+      this.setState({
+        groups: newGroups
+      })
+  }
 
-    componentDidMount(){
-      this.getAllGroups()
-    }
-    
+  joinGroup = (e ) =>{
+    e.persist()
+
+    this.setState({selectedGroup: e.target.innerText })
+
+    let currentUserId =  JSON.parse(localStorage.getItem('currentUser'))['id']
+    // anon function below is triggering our fetch once our state has been set, fixing async state.
+    this.setState({selectedGroup: e.target.innerText }, () => {
+      fetch('http://localhost:3000/groups', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+          'Accept':'application/json'
+        },
+        body: JSON.stringify({
+          name: this.state.selectedGroup,
+          user_id: currentUserId,
+          group_image: ''
+        })
+      })
+      .then(r => r.json())
+      .then((group)=> {
+      this.addNewGroup(group)
+      })
+      .catch(err => console.log(err))
+    })
+  }
+
+  addNewGroup = (group) => {
+    console.log(this.state.groups,"addnewgroup")
+    return this.setState(previousState =>({  
+      groups: {
+        ...previousState.groups, group
+        },
+    }))  
+  }
+
   render (){
 
     const options = [
-      { key: 1, text: 'Running', value: 1, id:1 },
-      { key: 2, text: 'Cat', value: 2,id:2}, 
-      { key: 3, text: 'Dogs', value: 3, id:3},
-      { key: 4, text: 'Yoga', value: 4, id:4},
-      { key: 5, text: 'Sports', value: 5, id:5},
-      { key: 6, text: 'Espionage', value: 6, id:6}
+      { key: 1, text: 'Running', value: 1},
+      { key: 2, text: 'Cat', value: 2}, 
+      { key: 3, text: 'Dogs', value: 3},
+      { key: 4, text: 'Yoga', value: 4},
+      { key: 5, text: 'Sports', value: 5},
+      { key: 6, text: 'Espionage', value: 6}
     ]
 
     return (
       <div>
-        <Dropdown text='Join Group' options={options} value={this.state.value} onChange={()=>this.joinGroup()} simple item />
+        <Dropdown text='Join Group' options={options} value={this.state.value} onChange={(e)=>this.joinGroup(e)} simple item />
         {this.mapOverGroup()}
       </div>
     )
