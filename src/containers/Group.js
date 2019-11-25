@@ -21,8 +21,9 @@ class Group extends Component{
   }
 
   filterUserGroups = () => {
-    return this.state.groups.filter( (group) => {
-      return JSON.parse(localStorage.currentUser)['id'] === group.user_id
+    // console.log(this.state.groups)
+      return this.state.groups.filter( (group) => {
+      return JSON.parse(localStorage.currentUser)['id'] === group.user_id;
     })
   }
 
@@ -30,12 +31,14 @@ class Group extends Component{
     return this.filterUserGroups().map(group => {
       return <GroupImage
         {...this.props} 
+        history={this.props.history}
         group={group} 
         key={group.id}  
         id={group.id} 
         removeSelfFromGroup={this.removeSelfFromGroup}/>  
     })
   }
+
   joinGroup = (value) =>{
     console.log("did I select a group",value)
   }
@@ -60,6 +63,7 @@ class Group extends Component{
     }).then(response => {
       this.deleteGroup(id)
     })
+    .catch(err => console.log(err))
   }
 // }
   

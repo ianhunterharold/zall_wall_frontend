@@ -15,7 +15,6 @@ class Biography extends Component {
   // }
 
   render(){
-    // console.log(this.props.currentUser['bio']) 
     return (
       <div className='biography'>
         <Message>

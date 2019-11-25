@@ -37,15 +37,15 @@ class Login extends Component {
       .then (token => {
         localStorage.setItem('token', token.jwt)
         localStorage.setItem('currentUser', JSON.stringify(token.user))
-        console.log(localStorage.getItem('currentUser'))
+       
         // this.currentUser(token.user)
         this.loggedIn(); // is this method being executed? 
-        this.props.history.push('/profile') 
+        this.props.history.push('/profile') //connected with nested components not rendering properly without a refresh 
       })
       .catch(err => console.log(err))
   }
 
-  // currentUser = (users) => {
+  // currentUser = (LoggedInUser) => {
   //   let currentUserLoggedIn = this.props.users.find( user => user.username === this.state.username) 
   //   this.props.captureCurrentUser(currentUserLoggedIn)
   // }

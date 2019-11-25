@@ -35,18 +35,23 @@ class Profile extends Component {
     .then(allKarma=> this.setState({karmas:allKarma}))
   }
 
-
-
-
-
   componentDidMount(){
     this.getAllKarmas()
     this.getAllUsers()
   }
 
+  // componentDidUpdate(){
+  //   this.refreshPage()
+  // }
 
+  // move to component specific level
+
+  // refreshPage = () => {
+  //   window.location.reload(true)
+  // }
 
   render(){
+    //  console.log( {...this.props} )
       // give all children components {...this.props} so that they may access 
     return(
       <div>
@@ -58,12 +63,14 @@ class Profile extends Component {
             <Grid.Column width={4}>
               <Headshot 
               {...this.props} 
+              history={this.props.history}
               currentUser={this.props.currentUser} 
               />
             </Grid.Column>
             <Grid.Column width={12}>
               <Biography 
                 {...this.props} 
+                history={this.props.history}
                 users={this.props.users} 
                 currentUser={this.props.currentUser} 
               />
@@ -74,6 +81,7 @@ class Profile extends Component {
             <Grid.Column width={3}>
               <Group 
               {...this.props} 
+              history={this.props.history}
               /> 
               {/* <Image src='https://react.semantic-ui.com/images/wireframe/image.png' /> 
               <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />

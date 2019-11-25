@@ -4,7 +4,7 @@ import { Image, Header } from 'semantic-ui-react';
 const Headshot =(props) => {
   // let currentUserImage = props.currentUser['picture'];
   // let currentUserName = props.currentUser['name'];
-  // is local storage asycnronous ? 
+
   
   return (
     <div>
