@@ -21,15 +21,11 @@ class App extends PureComponent {
     this.rehydrateState();
   } 
 
-  componentWillUnmount(){
-    this.setState({});
-  }
-
   // rehydrate state is saying that everytime we refresh the page, reset state to be igual to the local storage
 
   rehydrateState = () => {
     this.setState({currentUser: JSON.parse(localStorage.getItem('currentUser')) })
-    console.log('rehydrating myself everytime the page loads, slightly buggy not updating current user even though in state current user is there', this.currentUser)
+    // console.log('rehydrating myself everytime the page loads, slightly buggy not updating current user even though in state current user is there', this.currentUser)
   }
 
   captureCurrentUser = (currentUser) => {
@@ -55,6 +51,7 @@ class App extends PureComponent {
             return <Profile 
             currentUser={this.state.currentUser}
             {...props}
+            {...this.props}
             />}
           }/>
         </Router>
