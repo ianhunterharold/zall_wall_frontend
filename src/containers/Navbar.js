@@ -17,6 +17,13 @@ class Navbar extends Component {
     window.location.reload(true); 
   }
 
+  handleHomeClick = (e) => {
+    console.log('did I click?',e)
+    this.props.history.push('/profile')
+    window.location.reload(true);
+  }
+
+
 
   render(){
     return(
@@ -24,11 +31,11 @@ class Navbar extends Component {
         <Menu.Item
           name='home'
           active={this.activeItem === 'home'}
-          onClick={this.handleItemClick}
+          onClick={(e)=>this.handleHomeClick(e)}
         />
         <Menu.Menu position='right'>
         <Menu.Item>
-          <Input icon='search' placeholder='Search for colleagues...'/> 
+          <Input onChange={(e)=>this.searchColleagues(e)} icon='search' placeholder='Search for colleagues...'/> 
         </Menu.Item>
         <Menu.Item
           name='logout'
