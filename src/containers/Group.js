@@ -23,12 +23,12 @@ class Group extends Component{
     })
     .then(r=>r.json())
     .then(allGroups=> {
-      console.log(allGroups)
       this.setState({groups: allGroups})
     })
   }
 
   filterUserGroups = () => {
+    // console.log(this.state.groups)
     const convertedObjectIntoArrayOfValues = Object.values(this.state.groups)
       return convertedObjectIntoArrayOfValues.filter( (group) => {
       return JSON.parse(localStorage.currentUser)['id'] === group.user_id;
@@ -36,6 +36,7 @@ class Group extends Component{
   }
 
   mapOverGroup = () => {
+    // console.log(this.filterUserGroups())
     return this.filterUserGroups().map(group => {
       return <GroupImage
         {...this.props} 
@@ -43,7 +44,8 @@ class Group extends Component{
         group={group} 
         key={group.id}  
         id={group.id} 
-        removeSelfFromGroup={this.removeSelfFromGroup}/>  
+        removeSelfFromGroup={this.removeSelfFromGroup}
+      />  
     })
   }
 

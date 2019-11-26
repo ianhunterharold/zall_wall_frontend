@@ -1,16 +1,16 @@
 import React from 'react';
 import { Component } from 'react';
 import Navbar from './Navbar';
-import { Grid, Image } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import Biography from './Biography'
 import Group from './Group';
-import Karma from '../components/Karma';
+import Karma from './Karma';
 import Headshot from '../components/Headshot';
+
 class Profile extends Component {
 
   state = {
-    users:[],
-    karmas:[]
+    users:[]
   }
 
   getAllUsers = () => {
@@ -21,22 +21,13 @@ class Profile extends Component {
     }
     })
     .then(r=>r.json())
-    .then(allUsers=>this.setState({users: allUsers }))
+    .then(allUsers=> {
+      this.setState({users: allUsers })
+    })
   }
 
-  getAllKarmas = () => {
-    fetch('http://localhost:3000/karmas',{
-      method: 'GET',
-      headers: {
-        Authorization:`Bearer ${localStorage.getItem('token')}`
-      }
-    })
-    .then(r=>r.json())
-    .then(allKarma=> this.setState({karmas:allKarma}))
-  }
 
   componentDidMount(){
-    this.getAllKarmas()
     this.getAllUsers()
   }
 
@@ -72,19 +63,12 @@ class Profile extends Component {
               <Group 
               {...this.props} 
               history={this.props.history}
-              /> 
-              {/* <Image src='https://react.semantic-ui.com/images/wireframe/image.png' /> 
-              <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
-              <Image src='https://react.semantic-ui.com/images/wireframe/image.png' /> */}
-              
+              />             
             </Grid.Column>
             <Grid.Column width={13}>
-              <Karma {...this.props} />
-              inside of karma on profile
-              <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-              <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-              <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-              <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+              <Karma 
+                {...this.props} 
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>
