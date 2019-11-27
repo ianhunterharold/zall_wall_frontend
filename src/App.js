@@ -6,6 +6,7 @@ import Profile from './containers/Profile';
 import Navbar from './containers/Navbar';
 import SearchedProfile from './containers/SearchedProfile'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import CreateUser from './containers/CreateUser';
 
 
 class App extends PureComponent {
@@ -60,7 +61,7 @@ class App extends PureComponent {
             currentUser={this.state.currentUser}
             />}
           }/>
-          <Route path='/*' render={ (props) => {
+          <Route path='/' render={ (props) => {
             return < Navbar
               {...props}
               selectedUser={this.selectedUser}
@@ -79,6 +80,9 @@ class App extends PureComponent {
               selectedUser={this.selectedUser}
             />}
           }/>
+          <Route exact path='/createaccount'
+          component={CreateUser} 
+          />
         </Router>
       </div>
     );
