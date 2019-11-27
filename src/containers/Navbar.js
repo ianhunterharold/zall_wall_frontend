@@ -19,7 +19,7 @@ class Navbar extends Component {
 
   handleHomeClick = (e) => {
     this.props.history.push('/profile')
-    // window.location.reload(true);
+    window.location.reload(true);
   }
 
   chooseColleague = (e) => {

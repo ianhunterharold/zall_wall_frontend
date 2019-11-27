@@ -28,7 +28,6 @@ class Group extends Component{
   }
 
   filterUserGroups = () => {
-    // console.log(this.state.groups)
     const convertedObjectIntoArrayOfValues = Object.values(this.state.groups)
       return convertedObjectIntoArrayOfValues.filter( (group) => {
       return JSON.parse(localStorage.currentUser)['id'] === group.user_id;
@@ -36,7 +35,6 @@ class Group extends Component{
   }
 
   mapOverGroup = () => {
-    // console.log(this.filterUserGroups())
     return this.filterUserGroups().map(group => {
       return <GroupImage
         {...this.props} 
@@ -63,7 +61,9 @@ class Group extends Component{
   }
 
   deleteGroup = (id) => {
+
       let newGroups = this.state.groups.filter( (group) => {
+        // console.log(groups,"was stating that groups was not an array.")
         return group.id !== id
       })
       this.setState({
