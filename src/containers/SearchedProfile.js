@@ -29,9 +29,9 @@ class SearchedProfile extends Component {
   mapOverKarma = () => {
     return this.state.specificKarmas.map( (karma) => {
       return(
-        <>
-        {karma.content}
-        </>
+        <div key={karma.id} >
+          {karma.content}
+        </div>
       )
     })
   }
@@ -55,7 +55,7 @@ class SearchedProfile extends Component {
     return this.state.specificGroups.map((group) => {
       return(
         <>
-          <div className='ui blue card'>
+          <div className='ui blue card' key={group.id}>
             {group.name}
           </div>
         </>
@@ -83,9 +83,9 @@ class SearchedProfile extends Component {
   mapOverOneUser =() => {
     return this.state.specificUser.map((user)=>{
       return(
-        <>
-        {user.name}
-        </>
+        <div key={user.id}>
+          {user.name}
+        </div>
       )
     })
   }
@@ -93,9 +93,9 @@ class SearchedProfile extends Component {
   returnBioSection = () => {
     return this.state.specificUser.map( (user)=> {
       return(
-        <>
-        {user.bio}
-        </>
+        <div key={user.id}>
+          {user.bio}
+        </div>
       )
     })
   }
@@ -106,7 +106,6 @@ class SearchedProfile extends Component {
 
   onSubmittingKarma = (e) => {
     e.preventDefault();
-    console.log("did i click the button?",e)
     fetch('http://localhost:3000/karmas', {
       method: 'POST',
       headers: {
@@ -120,19 +119,25 @@ class SearchedProfile extends Component {
       })
     }).then(r=>r.json())
     .then(newKarma => {
-      console.log(newKarma)
-      this.addToSpecKarma(newKarma)
+      this.addingToSpecKarma(newKarma)
+      this.resetKarmaInput()
     })
     .catch(err => console.log(err))
   }
 
-    addToSpeckarma = (newKarma) =>{
-      console.log("newkarma should be one", newKarma)
-      return this.setState(previousState => ({
-        specificKarmas: {...previousState.specificKarmas, newKarma}
-      }))
+    addingToSpecKarma = (newKarma) => {
+      this.setState( (previousState) => {
+        return {
+        specificKarmas: [...previousState.specificKarmas, newKarma]
+        }
+      })
     }
 
+    resetKarmaInput = () => {
+      this.setState({
+        currentKarmaInput:''
+      })
+    }
   componentDidMount(){
     this.getAllUsers()
     this.getAllGroups()

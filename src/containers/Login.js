@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
-import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
-
+import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 class Login extends Component {
   state ={
     username:'',
@@ -50,6 +50,7 @@ class Login extends Component {
   //   this.props.captureCurrentUser(currentUserLoggedIn)
   // }
   
+  
   render() {
     return (
       <div>
@@ -81,14 +82,12 @@ class Login extends Component {
           <Button color='blue' fluid size='large' type='submit'>Login</Button>
           </Segment>
         </form>
-        {/* <Message>
-          New? <a>Sign Up</a>   
-          {/* will need pathing to signup page */}
-        {/* </Message> */}
+        <Message>
+          New? <NavLink to='/createaccount'>Sign Up</NavLink>   
+        </Message>
         </Grid.Column>
         </Grid>
       </div>
-
     )
   }
 

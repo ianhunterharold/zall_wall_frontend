@@ -53,8 +53,10 @@ class Navbar extends Component {
         }
       ]
 
-    return(
+    return (
+      
       <>
+      {localStorage.getItem('currentUser') ? 
         <Menu secondary>
           <Menu.Item
             name='home'
@@ -81,6 +83,7 @@ class Navbar extends Component {
             />
           </Menu.Menu>
         </Menu>
+        : null }
       </>
     )
   }

@@ -30,9 +30,8 @@ class Profile extends Component {
     this.getAllUsers()
   }
 
-
   render(){
-      // give all children components {...this.props} so that they may access 
+  
     return(
       <div>
         <Grid celled>
@@ -51,7 +50,6 @@ class Profile extends Component {
                 users={this.props.users} 
                 currentUser={this.props.currentUser} 
               />
-              {/* <Image src='https://react.semantic-ui.com/images/wireframe/centered-paragraph.png' />biography */}
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
