@@ -12,16 +12,49 @@ class SearchedProfile extends Component {
     specificKarmas:[]
   }
 
-  getAllUsers = () =>{ 
-    fetch('http://localhost:3000/api/users')
+  getAllGroups = () => {
+    fetch('http://localhost:3000/groups')
     .then(r=>r.json())
-    .then(users=> {
-    const specUser = this.findSpecficUser(users)
-    this.setState({specificUser: specUser})
+    .then(groups => {
+      const specGroups = this.findSpecificGroup(groups)
+      this.setState({specificGroups: specGroups})
+    })
+  }
+  
+  findSpecificGroup = (groups) => {
+    return groups.filter( (group) => { 
+      // console.log( typeof parseInt(localStorage.getItem('specificUserId')) )
+      // console.log(typeof group.user_id)
+      // console.log(group.user_id == localStorage.getItem('specificUserId'))
+      return group.user_id == parseInt(localStorage.getItem('specificUserId'))
     })
   }
 
-  findSpecficUser =(users) =>{
+  mapOverGroups = () => {
+    return this.state.specificGroups.map((group) => {
+      return(
+        <>
+          <div className='ui blue card'>
+            {group.name}
+          </div>
+        </>
+      ) 
+    })
+  }
+
+  getAllUsers = () => { 
+    fetch('http://localhost:3000/api/users')
+    .then(r=>r.json())
+    .then( (users) => {
+      const specUser = this.findSpecficUser(users)
+      this.setState({specificUser: specUser})
+      localStorage.setItem('specificUserId',JSON.stringify(specUser[0]['id']))
+      // going inside of the array, at the first object and targeting the id, not ideal but works for now
+    })
+  }
+  
+
+  findSpecficUser =(users) => {
     return users.filter((user)=>{
       return user.name === localStorage.getItem('specificUser')
     })
@@ -47,9 +80,9 @@ class SearchedProfile extends Component {
     })
   }
 
-
   componentDidMount(){
     this.getAllUsers()
+    this.getAllGroups()
   }
 
   render(){
@@ -62,7 +95,7 @@ class SearchedProfile extends Component {
             <Grid.Column width={4}>
             {/* Headshot on SearchedProfile */}
             <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='large' rounded/>
-               <Header as='h2' block>{this.mapOverOneUser()}</Header>
+              <Header as='h2' block>{this.mapOverOneUser()}</Header>
             </Grid.Column>
             <Grid.Column width={12}>
               <Message>
@@ -73,10 +106,7 @@ class SearchedProfile extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column width={3}>
-              {/* <Group 
-              // {...this.props} 
-              // history={this.props.history}
-              />              */}
+            {this.mapOverGroups()}
             </Grid.Column>
             <Grid.Column width={13}>
               {/* <Karma 
