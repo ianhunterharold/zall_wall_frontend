@@ -61,7 +61,9 @@ class Group extends Component{
   }
 
   deleteGroup = (id) => {
+
       let newGroups = this.state.groups.filter( (group) => {
+        // console.log(groups,"was stating that groups was not an array.")
         return group.id !== id
       })
       this.setState({

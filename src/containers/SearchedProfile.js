@@ -1,17 +1,41 @@
 import React from 'react';
 import { Component } from 'react';
-import { Grid, Image, Header, Message } from 'semantic-ui-react';
-
-
+import { Grid, Image, Header, Message, Comment, Form, Card, TextArea, Button } from 'semantic-ui-react';
 
 class SearchedProfile extends Component {
   
   state = {
     specificUser: [],
     specificGroups:[],
-    specificKarmas:[]
+    specificKarmas:[],
+    currentKarmaInput:''
   }
 
+  getAllKarmas = () => {
+    fetch('http://localhost:3000/karmas')
+    .then(r=>r.json())
+    .then(karmas => {
+      const specKarmas = this.findSpecKarma(karmas)
+      this.setState({specificKarmas: specKarmas })
+    })
+  }
+
+  findSpecKarma =(karmas) => {
+    return karmas.filter( (karma) => {
+      return karma.user_id === parseInt(localStorage.getItem('specificUserId'))
+    })
+  }
+
+  mapOverKarma = () => {
+    return this.state.specificKarmas.map( (karma) => {
+      return(
+        <>
+        {karma.content}
+        </>
+      )
+    })
+  }
+  
   getAllGroups = () => {
     fetch('http://localhost:3000/groups')
     .then(r=>r.json())
@@ -23,10 +47,7 @@ class SearchedProfile extends Component {
   
   findSpecificGroup = (groups) => {
     return groups.filter( (group) => { 
-      // console.log( typeof parseInt(localStorage.getItem('specificUserId')) )
-      // console.log(typeof group.user_id)
-      // console.log(group.user_id == localStorage.getItem('specificUserId'))
-      return group.user_id == parseInt(localStorage.getItem('specificUserId'))
+      return group.user_id === parseInt(localStorage.getItem('specificUserId'))
     })
   }
 
@@ -53,7 +74,6 @@ class SearchedProfile extends Component {
     })
   }
   
-
   findSpecficUser =(users) => {
     return users.filter((user)=>{
       return user.name === localStorage.getItem('specificUser')
@@ -80,9 +100,20 @@ class SearchedProfile extends Component {
     })
   }
 
+  handleKarmaInputChange = (e) => {
+    console.log(e.target.value)
+    this.setState({currentKarmaInput: e.target.value})
+  }
+
+  onSubmittingKarma = (e) => {
+    e.preventDefault();
+    console.log("did i click the button?",e)
+  }
+
   componentDidMount(){
     this.getAllUsers()
     this.getAllGroups()
+    this.getAllKarmas()
   }
 
   render(){
@@ -109,9 +140,26 @@ class SearchedProfile extends Component {
             {this.mapOverGroups()}
             </Grid.Column>
             <Grid.Column width={13}>
-              {/* <Karma 
-                // {...this.props} 
-              /> */}
+            <Form onSubmit={this.onSubmittingKarma}>
+              <Card fluid color='blue'>
+                <TextArea
+                  placeholder='words of encouragement..'
+                  id='karma'
+                  name='karma'
+                  value={this.state.currentKarmaInput}
+                  type='text'
+                  onChange={this.handleKarmaInputChange}
+                />
+              </Card>    
+              <Button fluid>Send</Button>
+            </Form>
+              <Comment.Content>
+                <Comment.Text>
+                  <Comment.Group size='large'>
+                    {this.mapOverKarma()}
+                  </Comment.Group>
+                </Comment.Text>
+              </Comment.Content>
             </Grid.Column>
           </Grid.Row>
         </Grid>
