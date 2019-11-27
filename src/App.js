@@ -3,15 +3,17 @@ import './App.css';
 import { PureComponent } from 'react';
 import Login from './containers/Login' 
 import Profile from './containers/Profile';
+import Navbar from './containers/Navbar';
+import SearchedProfile from './containers/SearchedProfile'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 
 class App extends PureComponent {
 
   state = {
-    currentUser: {}
+    currentUser: {},
+    selectedColleague:''
   }
-
 
   loggedIn = () => {
     return !!localStorage.getItem('token')
@@ -21,19 +23,30 @@ class App extends PureComponent {
     this.rehydrateState();
   } 
 
-  // rehydrate state is saying that everytime we refresh the page, reset state to be igual to the local storage
-
   rehydrateState = () => {
-    this.setState({currentUser: JSON.parse(localStorage.getItem('currentUser')) })
+    this.setState( {currentUser: JSON.parse(localStorage.getItem('currentUser')) })
     // console.log('rehydrating myself everytime the page loads, slightly buggy not updating current user even though in state current user is there', this.currentUser)
   }
 
   captureCurrentUser = (currentUser) => {
     this.setState({currentUser: currentUser })
     localStorage.setItem('currentUser',JSON.stringify(currentUser))
-    console.log('captureCurrentUser', this.state.currentUser)
+    // console.log('captureCurrentUser', this.state.currentUser)
   }
 
+  selectedUser = (selectedColleague) => {
+    this.setState({ 
+      // explicitly assigning my state
+      selectedColleague:selectedColleague 
+      }, ()=> { 
+        this.settingSpecificUserInLocalStorage();
+        //setting localstorage after set state is finished
+      }) 
+  }
+
+  settingSpecificUserInLocalStorage = () => {
+    localStorage.setItem('specificUser', this.state.selectedColleague)
+  }
 
 
   render(){
@@ -41,10 +54,16 @@ class App extends PureComponent {
       <div className="App">
         <Router>
           {this.loggedIn() ? null : <Redirect to='/'/>}
-          <Route exact path='/' render={props => {
+          <Route exact path='/' render={ (props) => {
           return <Login {...props} 
             captureCurrentUser={this.captureCurrentUser}
             currentUser={this.state.currentUser}
+            />}
+          }/>
+          <Route path='/*' render={ (props) => {
+            return < Navbar
+              {...props}
+              selectedUser={this.selectedUser}
             />}
           }/>
           <Route exact path='/profile' render={ (props) => {
@@ -52,6 +71,12 @@ class App extends PureComponent {
             currentUser={this.state.currentUser}
             {...props}
             {...this.props}
+            />}
+          }/>
+          <Route exact path='/searchedprofile' render={ (props) => { 
+            return <SearchedProfile
+              {...props}
+              selectedUser={this.selectedUser}
             />}
           }/>
         </Router>
