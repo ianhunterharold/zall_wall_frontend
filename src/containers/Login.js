@@ -25,6 +25,7 @@ class Login extends Component {
     return fetch('http://localhost:3000/api/login', {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
@@ -43,13 +44,12 @@ class Login extends Component {
       })
       .catch(err => console.log(err))
   }
-
+  
   // currentUser = (LoggedInUser) => {
   //   let currentUserLoggedIn = this.props.users.find( user => user.username === this.state.username) 
   //   this.props.captureCurrentUser(currentUserLoggedIn)
   // }
   
-
   render() {
     return (
       <div>

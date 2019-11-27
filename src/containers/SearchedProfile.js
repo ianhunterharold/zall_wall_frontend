@@ -101,14 +101,37 @@ class SearchedProfile extends Component {
   }
 
   handleKarmaInputChange = (e) => {
-    console.log(e.target.value)
     this.setState({currentKarmaInput: e.target.value})
   }
 
   onSubmittingKarma = (e) => {
     e.preventDefault();
     console.log("did i click the button?",e)
+    fetch('http://localhost:3000/karmas', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({  
+        content: this.state.currentKarmaInput,
+        user_id: parseInt(localStorage.getItem('specificUserId'))
+      })
+    }).then(r=>r.json())
+    .then(newKarma => {
+      console.log(newKarma)
+      this.addToSpecKarma(newKarma)
+    })
+    .catch(err => console.log(err))
   }
+
+    addToSpeckarma = (newKarma) =>{
+      console.log("newkarma should be one", newKarma)
+      return this.setState(previousState => ({
+        specificKarmas: {...previousState.specificKarmas, newKarma}
+      }))
+    }
 
   componentDidMount(){
     this.getAllUsers()
