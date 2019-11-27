@@ -101,7 +101,6 @@ class Group extends Component{
   }
 
   addNewGroup = (group) => {
-    console.log(this.state.groups,"addnewgroup")
     return this.setState(previousState =>({  
       groups: {
         ...previousState.groups, group

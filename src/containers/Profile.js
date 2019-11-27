@@ -1,11 +1,11 @@
 import React from 'react';
 import { Component } from 'react';
-import Navbar from './Navbar';
 import { Grid } from 'semantic-ui-react';
 import Biography from './Biography'
 import Group from './Group';
 import Karma from './Karma';
 import Headshot from '../components/Headshot';
+// import SearchedProfile from './SearchedProfile';
 
 class Profile extends Component {
 
@@ -26,7 +26,6 @@ class Profile extends Component {
     })
   }
 
-
   componentDidMount(){
     this.getAllUsers()
   }
@@ -36,9 +35,6 @@ class Profile extends Component {
       // give all children components {...this.props} so that they may access 
     return(
       <div>
-        <Navbar 
-        {...this.props}
-        />
         <Grid celled>
           <Grid.Row>
             <Grid.Column width={4}>

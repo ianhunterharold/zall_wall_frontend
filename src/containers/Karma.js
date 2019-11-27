@@ -35,6 +35,7 @@ class Karma extends Component{
   }
 
   mapOverKarma = () => {
+    // console.log(this.filterKarma())
     return this.filterKarma().map((karma) => {
       return <KarmaIndividualComment 
       {...this.props}

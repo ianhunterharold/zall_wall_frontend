@@ -1,12 +1,12 @@
 import React from 'react';
 import { Component } from 'react';
-import { Input, Menu } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 
 
 class Navbar extends Component {
 
   state = { 
-    activeItem:'home' 
+    activeItem:'home'
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -18,34 +18,70 @@ class Navbar extends Component {
   }
 
   handleHomeClick = (e) => {
-    console.log('did I click?',e)
     this.props.history.push('/profile')
-    window.location.reload(true);
+    // window.location.reload(true);
+  }
+
+  chooseColleague = (e) => {
+    //e.target.innerText is returning as a string
+    this.props.history.push('/searchedprofile')
+    this.props.selectedUser(e.target.innerText)
   }
 
 
 
   render(){
+
+      const colleagueOptions = [
+        {
+          key:'Ian Hunter',
+          text:'Ian Hunter',
+          value:'Ian Hunter',
+          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+        },
+        {
+          key:'Peter Paul',
+          text:'Peter Paul',
+          value:'Peter Paul',
+          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+        },
+        {
+          key:'Marc Hilpert',
+          text:'Marc Hilpert',
+          value:'Marc Hilpert',
+          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+        }
+      ]
+
     return(
-      <Menu secondary>
-        <Menu.Item
-          name='home'
-          active={this.activeItem === 'home'}
-          onClick={(e)=>this.handleHomeClick(e)}
-        />
-        <Menu.Menu position='right'>
-        <Menu.Item>
-          <Input onChange={(e)=>this.searchColleagues(e)} icon='search' placeholder='Search for colleagues...'/> 
-        </Menu.Item>
-        <Menu.Item
-          name='logout'
-          active={this.activeItem === 'logout'}
-          onClick={ () => {
-            this.logOut();
-          }}
+      <>
+        <Menu secondary>
+          <Menu.Item
+            name='home'
+            active={this.activeItem === 'home'}
+            onClick={(e)=>this.handleHomeClick(e)}
           />
-        </Menu.Menu>
-      </Menu>
+          <Menu.Menu position='right'>
+          <Menu.Item>
+          <Dropdown 
+            placeholder='Select Colleague..' 
+            fluid 
+            selection 
+            onChange={(e)=>this.chooseColleague(e)}
+            options={colleagueOptions} 
+          />
+            {/* <Input  icon='search' placeholder='Search for colleagues...'/>  after mvp, will be switching to dynamic search*/}
+          </Menu.Item>
+          <Menu.Item
+            name='logout'
+            active={this.activeItem === 'logout'}
+            onClick={ () => {
+              this.logOut();
+            }}
+            />
+          </Menu.Menu>
+        </Menu>
+      </>
     )
   }
 
