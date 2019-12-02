@@ -83,6 +83,8 @@ class SearchedProfile extends Component {
   }
 
   mapOverOneUser =() => {
+    // let convertingObjectToArray = Object.values(this.state.specificUser)
+    // console.log(this.state.specificUser[0]['picture'])
     return this.state.specificUser.map((user)=>{
       return(
         <>
@@ -127,24 +129,35 @@ class SearchedProfile extends Component {
     .catch(err => console.log(err))
   }
 
-    addingToSpecKarma = (newKarma) => {
-      this.setState( (previousState) => {
-        return {
-        specificKarmas: [...previousState.specificKarmas, newKarma]
-        }
-      })
-    }
+  addingToSpecKarma = (newKarma) => {
+    this.setState( (previousState) => {
+      return {
+      specificKarmas: [...previousState.specificKarmas, newKarma]
+      }
+    })
+  }
 
-    resetKarmaInput = () => {
-      this.setState({
-        currentKarmaInput:''
-      })
+  resetKarmaInput = () => {
+    this.setState({
+      currentKarmaInput:''
+    })
+  }
+
+  getImageFromSpecUser = () => {
+    if (this.state.specificUser.length > 0) {
+      const specificUserObject = this.state.specificUser[0];
+      return specificUserObject.picture
+    } else {
+      return 'https://react.semantic-ui.com/images/wireframe/image.png'
     }
+  }
+
   componentDidMount(){
     this.getAllUsers()
     this.getAllGroups()
     this.getAllKarmas()
   }
+
 
   render(){
       
@@ -154,10 +167,7 @@ class SearchedProfile extends Component {
         <Grid celled>
           <Grid.Row>
             <Grid.Column width={4}>
-            {/* Headshot on SearchedProfile */}
-            {/* <Image src={this.state.specificUser.picture} size='large' rounded /> */}
-             {/* {console.log(this.state.specificUser[0],"specific user")} */}
-             <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='large' rounded/>
+            <Image src={this.getImageFromSpecUser()} size='large' rounded/>
               <Header as='h2' block>{this.mapOverOneUser()}</Header>
             </Grid.Column>
             <Grid.Column width={12}>
