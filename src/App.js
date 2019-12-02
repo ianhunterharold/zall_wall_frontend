@@ -38,7 +38,7 @@ class App extends PureComponent {
   selectedUser = (selectedColleague) => {
     this.setState({ 
       // explicitly assigning my state
-      selectedColleague:selectedColleague 
+      selectedColleague: selectedColleague 
       }, ()=> { 
         this.settingSpecificUserInLocalStorage();
         //setting localstorage after set state is finished

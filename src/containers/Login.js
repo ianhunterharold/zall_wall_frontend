@@ -50,7 +50,6 @@ class Login extends Component {
   //   this.props.captureCurrentUser(currentUserLoggedIn)
   // }
   
-  
   render() {
     return (
       <div>
