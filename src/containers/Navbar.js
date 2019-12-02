@@ -23,7 +23,7 @@ class Navbar extends Component {
   }
 
   chooseColleague = (e) => {
-    //e.target.innerText is returning as a string
+    
     this.props.history.push('/searchedprofile')
     this.props.selectedUser(e.target.innerText)
   }
@@ -37,19 +37,19 @@ class Navbar extends Component {
           key:'Ian Hunter',
           text:'Ian Hunter',
           value:'Ian Hunter',
-          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+          image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
         },
         {
           key:'Peter Paul',
           text:'Peter Paul',
           value:'Peter Paul',
-          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+          image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
         },
         {
-          key:'Marc Hilpert',
-          text:'Marc Hilpert',
-          value:'Marc Hilpert',
-          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+          key:'Melissa Golba',
+          text:'Melissa Golba',
+          value:'Melissa Golba',
+          image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
         }
       ]
 

@@ -10,7 +10,7 @@ class Group extends Component{
     selectedGroup:[]
   }
 
-   componentDidMount(){
+  componentDidMount(){
       this.getAllGroups()
     }
 
@@ -74,7 +74,7 @@ class Group extends Component{
   joinGroup = (e ) =>{
     e.persist()
 
-    this.setState({selectedGroup: e.target.innerText })
+    // this.setState({selectedGroup: e.target.innerText })
 
     let currentUserId =  JSON.parse(localStorage.getItem('currentUser'))['id']
     // anon function below is triggering our fetch once our state has been set, fixing async state.
@@ -101,10 +101,11 @@ class Group extends Component{
   }
 
   addNewGroup = (group) => {
+    
     return this.setState(previousState =>({  
-      groups: {
+      groups: [
         ...previousState.groups, group
-        },
+      ],
     }))  
   }
 

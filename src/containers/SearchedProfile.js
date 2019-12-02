@@ -29,9 +29,9 @@ class SearchedProfile extends Component {
   mapOverKarma = () => {
     return this.state.specificKarmas.map( (karma) => {
       return(
-        <div key={karma.id} >
+        <>
           {karma.content}
-        </div>
+        </>
       )
     })
   }
@@ -55,7 +55,7 @@ class SearchedProfile extends Component {
     return this.state.specificGroups.map((group) => {
       return(
         <>
-          <div className='ui blue card' key={group.id}>
+          <div className='ui blue card'>
             {group.name}
           </div>
         </>
@@ -68,9 +68,11 @@ class SearchedProfile extends Component {
     .then(r=>r.json())
     .then( (users) => {
       const specUser = this.findSpecficUser(users)
-      this.setState({specificUser: specUser})
-      localStorage.setItem('specificUserId',JSON.stringify(specUser[0]['id']))
-      // going inside of the array, at the first object and targeting the id, not ideal but works for now
+      this.setState({specificUser: specUser}, ()=> {
+        //added callback function so that state could be updated then local storage off of states value.
+        localStorage.setItem('specificUserId',JSON.stringify(specUser[0]['id']))
+        // going inside of the array, at the first object and targeting the id, not ideal but works for the time being.
+      })
     })
   }
   
@@ -83,9 +85,9 @@ class SearchedProfile extends Component {
   mapOverOneUser =() => {
     return this.state.specificUser.map((user)=>{
       return(
-        <div key={user.id}>
+        <>
           {user.name}
-        </div>
+        </>
       )
     })
   }
@@ -93,9 +95,9 @@ class SearchedProfile extends Component {
   returnBioSection = () => {
     return this.state.specificUser.map( (user)=> {
       return(
-        <div key={user.id}>
+        <>
           {user.bio}
-        </div>
+        </>
       )
     })
   }
@@ -145,7 +147,7 @@ class SearchedProfile extends Component {
   }
 
   render(){
-
+      
     return(
       <>
       <div>
@@ -153,7 +155,9 @@ class SearchedProfile extends Component {
           <Grid.Row>
             <Grid.Column width={4}>
             {/* Headshot on SearchedProfile */}
-            <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='large' rounded/>
+            {/* <Image src={this.state.specificUser.picture} size='large' rounded /> */}
+             {/* {console.log(this.state.specificUser[0],"specific user")} */}
+             <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='large' rounded/>
               <Header as='h2' block>{this.mapOverOneUser()}</Header>
             </Grid.Column>
             <Grid.Column width={12}>

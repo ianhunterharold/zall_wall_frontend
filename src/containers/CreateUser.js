@@ -1,13 +1,26 @@
 import React from 'react';
 import { Component } from 'react';
-import { Button, Form, Grid, Header, Segment, Input } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
 
 
 class CreateUser extends Component {
+  //does username match any other username? if it does, flag with error, edge case 
 
-  //does username match any other username? if it does, flag with error 
-  // do passwords match up? if they dont, flag with error 
+  // do passwords match up? if they dont, flag with error
   //methods for keeping state of username, 
+
+  state = {
+    name:'',
+    username:'',
+    password:'',
+    secondPassword:''
+  }
+
+  newUserInput = (e) => {
+    this.setState({ [e.target.id]: [e.target.value] }) 
+  }
+      
+
 
 
   render(){
@@ -21,13 +34,21 @@ class CreateUser extends Component {
           <Segment stacked>
           <Form.Input 
             fluid
+            icon='lock'
+            iconPosition='left'
+            type='name'
+            id='name'
+            placeholder= 'Name'
+            onChange={this.newUserInput}
+          />
+          <Form.Input 
+            fluid
             icon='user'
             iconPosition='left'
             type='username'
             id='username'
             placeholder= 'Select username'
-            // value={this.state.createUsername}
-            // onChange={this.handleInput}
+            onChange={this.newUserInput}
           />
           <Form.Input 
             fluid
@@ -36,8 +57,7 @@ class CreateUser extends Component {
             type='password'
             id='password'
             placeholder= 'Choose password'
-            // value={this.state.password}
-            // onChange={this.handlePasswordInput}
+            onChange={this.newUserInput}
           />
           <Form.Input 
             fluid
@@ -46,8 +66,7 @@ class CreateUser extends Component {
             type='secondPassword'
             id='secondPassword'
             placeholder= 'Re-type password'
-            // value={this.state.password}
-            // onChange={this.handlePasswordInput}
+            onChange={this.newUserInput}
           />
           <Button color='blue' fluid size='large' type='submit'>Login</Button>
           </Segment>
