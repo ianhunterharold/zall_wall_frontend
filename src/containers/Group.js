@@ -7,7 +7,8 @@ class Group extends Component{
 
   state = {
     groups: [],
-    selectedGroup:[]
+    selectedGroup:[],
+    selectedGroupImage:''
   }
 
   getAllGroups = () => {
@@ -59,7 +60,6 @@ class Group extends Component{
   deleteGroup = (id) => {
 
       let newGroups = this.state.groups.filter( (group) => {
-        // console.log(groups,"was stating that groups was not an array.")
         return group.id !== id
       })
       this.setState({
@@ -67,12 +67,21 @@ class Group extends Component{
       })
   }
 
-  joinGroup = (e ) =>{
+  joinGroup = (e) =>{
     e.persist()
+    this.compareTextToUpdatePicture(e)
+
+    const returnedArray = this.compareTextToUpdatePicture(e)
+    this.pluckOffImageString(returnedArray)
+
+    const currentPluckedImageString = this.pluckOffImageString(returnedArray)
 
     let currentUserId =  JSON.parse(localStorage.getItem('currentUser'))['id']
-    // anon function below is triggering our fetch once our state has been set, fixing async state.
-    this.setState({selectedGroup: e.target.innerText }, () => {
+    // anon function below is triggering our fetch once our state has been set, fixing async state
+    this.setState({
+      selectedGroup: e.target.innerText,
+      selectedGroupImage: currentPluckedImageString
+    }, () => {
       fetch('http://localhost:3000/groups', {
         method: 'POST',
         headers: {
@@ -83,7 +92,7 @@ class Group extends Component{
         body: JSON.stringify({
           name: this.state.selectedGroup,
           user_id: currentUserId,
-          group_image: ''
+          group_image: this.state.selectedGroupImage
         })
       })
       .then(r => r.json())
@@ -95,14 +104,29 @@ class Group extends Component{
   }
 
   addNewGroup = (group) => {
-    
     return this.setState(previousState =>({  
       groups: [
         ...previousState.groups, group
       ],
     }))  
   }
-  
+
+  compareTextToUpdatePicture = (e) => {
+    const groupImagesArray = [
+      {name: 'Running', grouppicture:'https://i.imgur.com/PVqLlsb.png'},
+      {name: 'Cats', grouppicture:'https://i.imgur.com/PQqCbop.png'},
+      {name: 'Dogs', grouppicture:'https://i.imgur.com/62kaaj6.png'},
+      {name: 'Yoga', grouppicture:'https://i.imgur.com/JOU9odS.png'},
+      {name: 'Sports', grouppicture:'https://i.imgur.com/DwXhyGJ.png'},
+    ]
+    console.log(e.target.innerText)
+    return groupImagesArray.filter((individualObject)=> e.target.innerText === individualObject.name)
+  }
+
+  pluckOffImageString = (returnedArray) => {
+    return returnedArray[0].grouppicture
+  }
+
   componentDidMount(){
     this.getAllGroups()
   }
@@ -111,11 +135,10 @@ class Group extends Component{
 
     const options = [
       { key: 1, text: 'Running', value: 1},
-      { key: 2, text: 'Cat', value: 2}, 
+      { key: 2, text: 'Cats', value: 2}, 
       { key: 3, text: 'Dogs', value: 3},
       { key: 4, text: 'Yoga', value: 4},
       { key: 5, text: 'Sports', value: 5},
-      { key: 6, text: 'Espionage', value: 6}
     ]
 
     return (

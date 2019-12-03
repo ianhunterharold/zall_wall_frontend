@@ -54,11 +54,20 @@ class SearchedProfile extends Component {
   mapOverGroups = () => {
     return this.state.specificGroups.map((group) => {
       return(
-        <>
-          <div className='ui blue card'>
-            {group.name}
+        <div className='ui blue card'>
+        <Card>
+          <div>
+            <Card.Content as='h4'>
+              <Button fluid>
+                {group.name}
+              </Button>
+            </Card.Content> 
           </div>
-        </>
+            <div>
+              <Image src={group.group_image} />
+            </div>
+        </Card>
+      </div>
       ) 
     })
   }
