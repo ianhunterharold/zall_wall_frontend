@@ -48,7 +48,7 @@ class Karma extends Component{
 
   sendKarma = (e) => {
     e.preventDefault()
-    this.setState({karmaInput:`You can't give yourself karma ;)`})
+    this.setState({karmaInput:`You can't give yourself karma, it doesn't work like that ;)`})
   }
 
   handleChange =(e) => {

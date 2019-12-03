@@ -117,7 +117,7 @@ class Group extends Component{
       {name: 'Cats', grouppicture:'https://i.imgur.com/PQqCbop.png'},
       {name: 'Dogs', grouppicture:'https://i.imgur.com/62kaaj6.png'},
       {name: 'Yoga', grouppicture:'https://i.imgur.com/JOU9odS.png'},
-      {name: 'Sports', grouppicture:'https://i.imgur.com/DwXhyGJ.png'},
+      {name: 'Sports', grouppicture:'https://i.imgur.com/DwXhyGJ.png'}
     ]
     console.log(e.target.innerText)
     return groupImagesArray.filter((individualObject)=> e.target.innerText === individualObject.name)

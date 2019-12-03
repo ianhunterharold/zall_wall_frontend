@@ -14,6 +14,8 @@ const KarmaIndividualComment =(props) => {
         </Comment.Content>
       </div>
       <div>{props.karma.user_id}</div>
+      From
+      <div>{props.karma.giving_user_id}</div>
     </div>
   )
 

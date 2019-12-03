@@ -118,6 +118,7 @@ class SearchedProfile extends Component {
   }
 
   onSubmittingKarma = (e) => {
+    console.log(localStorage.getItem('currentUser'))
     e.preventDefault();
     fetch('http://localhost:3000/karmas', {
       method: 'POST',
@@ -128,7 +129,8 @@ class SearchedProfile extends Component {
       },
       body: JSON.stringify({  
         content: this.state.currentKarmaInput,
-        user_id: parseInt(localStorage.getItem('specificUserId'))
+        user_id: parseInt(localStorage.getItem('specificUserId')),
+        giving_user_id: JSON.parse(localStorage.getItem('currentUser'))['id']
       })
     }).then(r=>r.json())
     .then(newKarma => {
