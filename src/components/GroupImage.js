@@ -1,29 +1,25 @@
 import React from 'react';
-import  { Button } from 'semantic-ui-react'
+import  { Button, Image, Card } from 'semantic-ui-react'
 
 
 const GroupImage =(props) => {
 
-
   return (
     <div className='ui blue card'>
-      
-      <div> 
-        Group
-          <div>
-            {props.group.name}
-          </div>
-      </div>
-      <div>
+      <Card>
         <div>
-          Image
-        </div >
-        <div>
-          {props.group.group_image} 
+          <Card.Content as='h4'>
+            <Button fluid>
+              {props.group.name}
+            </Button>
+          </Card.Content> 
         </div>
-      </div>
-      <Button circular icon='x' onClick={(e) => props.removeSelfFromGroup(e, props.id)}
-      />
+          <div>
+            <Image src={props.group.group_image}/>
+          </div>
+        <Button circular icon='x' onClick={(e) => props.removeSelfFromGroup(e, props.id)}
+        />
+      </Card>
     </div>
   )
 }
