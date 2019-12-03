@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { Grid, Image, Header, Message, Comment, Form, Card, TextArea, Button } from 'semantic-ui-react';
+import moment from 'moment';  
 
 class SearchedProfile extends Component {
   
@@ -8,7 +9,9 @@ class SearchedProfile extends Component {
     specificUser: [],
     specificGroups:[],
     specificKarmas:[],
-    currentKarmaInput:''
+    currentKarmaInput:'',
+    givingUser: '',
+    allUsers: []
   }
 
   getAllKarmas = () => {
@@ -30,12 +33,27 @@ class SearchedProfile extends Component {
     return this.state.specificKarmas.map( (karma) => {
       return(
         <>
-          {karma.content}
+      <div>
+        <Comment.Group size='large'>
+          <Header as ='h3' dividing></Header>
+        <Comment> 
+          <Comment.Avatar src={karma.picture_of_giver}/>
+          {/* <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/jenny.jpg'/> */}
+          <Comment.Content>
+              <Comment.Author>{karma.from}</Comment.Author>
+              <Comment.Metadata><div>{moment(karma.created_at).format('llll')}</div></Comment.Metadata>
+              <Comment.Text>
+                {karma.content}
+              </Comment.Text>
+          </Comment.Content>
+        </Comment>
+        </Comment.Group>
+      </div>
         </>
       )
     })
   }
-  
+
   getAllGroups = () => {
     fetch('http://localhost:3000/groups')
     .then(r=>r.json())
@@ -76,6 +94,7 @@ class SearchedProfile extends Component {
     fetch('http://localhost:3000/api/users')
     .then(r=>r.json())
     .then( (users) => {
+      this.setState({allUsers: users})
       const specUser = this.findSpecficUser(users)
       this.setState({specificUser: specUser}, ()=> {
         //added callback function so that state could be updated then local storage off of states value.
@@ -92,8 +111,6 @@ class SearchedProfile extends Component {
   }
 
   mapOverOneUser =() => {
-    // let convertingObjectToArray = Object.values(this.state.specificUser)
-    // console.log(this.state.specificUser[0]['picture'])
     return this.state.specificUser.map((user)=>{
       return(
         <>
@@ -118,7 +135,6 @@ class SearchedProfile extends Component {
   }
 
   onSubmittingKarma = (e) => {
-    console.log(localStorage.getItem('currentUser'))
     e.preventDefault();
     fetch('http://localhost:3000/karmas', {
       method: 'POST',
@@ -130,7 +146,9 @@ class SearchedProfile extends Component {
       body: JSON.stringify({  
         content: this.state.currentKarmaInput,
         user_id: parseInt(localStorage.getItem('specificUserId')),
-        giving_user_id: JSON.parse(localStorage.getItem('currentUser'))['id']
+        giving_user_id: JSON.parse(localStorage.getItem('currentUser'))['id'],
+        from: JSON.parse(localStorage.getItem('currentUser'))['name'],
+        picture_of_giver: JSON.parse(localStorage.getItem('currentUser'))['picture']
       })
     }).then(r=>r.json())
     .then(newKarma => {
@@ -168,7 +186,6 @@ class SearchedProfile extends Component {
     this.getAllGroups()
     this.getAllKarmas()
   }
-
 
   render(){
       

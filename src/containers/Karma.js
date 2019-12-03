@@ -10,9 +10,6 @@ class Karma extends Component{
     karmas: [],
     karmaInput:''
   }
-  componentDidMount(){
-    this.getAllKarmas()
-  }
 
   getAllKarmas = () => {
     fetch('http://localhost:3000/karmas',{
@@ -35,16 +32,27 @@ class Karma extends Component{
   }
 
   mapOverKarma = () => {
-    // console.log(this.filterKarma())
     return this.filterKarma().map((karma) => {
       return <KarmaIndividualComment 
       {...this.props}
       key={karma.id}
       karma={karma}
       id={karma.id}
+      time={this.state.time}
+      // templateImageForKarma={this.templateImageForKarma}
       /> 
     })
   }
+
+  // templateImageForKarma = () => {
+  //   if (this.state.karmas.picture_of_giver){
+  //     const specificImageForKarma = this.state.karmas.picture_of_giver
+  //     return specificImageForKarma
+  //   } else {
+  //     return 'https://react.semantic-ui.com/images/wireframe/image.png';
+  //   }
+  // }
+
 
   sendKarma = (e) => {
     e.preventDefault()
@@ -53,6 +61,11 @@ class Karma extends Component{
 
   handleChange =(e) => {
     this.setState({karmaInput :e.target.value})
+  }
+
+  componentDidMount() {
+    this.getAllKarmas()
+    // this.templateImageForKarma()
   }
   
 render(){

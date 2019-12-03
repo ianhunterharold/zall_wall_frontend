@@ -119,7 +119,6 @@ class Group extends Component{
       {name: 'Yoga', grouppicture:'https://i.imgur.com/JOU9odS.png'},
       {name: 'Sports', grouppicture:'https://i.imgur.com/DwXhyGJ.png'}
     ]
-    console.log(e.target.innerText)
     return groupImagesArray.filter((individualObject)=> e.target.innerText === individualObject.name)
   }
 

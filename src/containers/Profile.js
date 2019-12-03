@@ -5,7 +5,6 @@ import Biography from './Biography'
 import Group from './Group';
 import Karma from './Karma';
 import Headshot from '../components/Headshot';
-// import SearchedProfile from './SearchedProfile';
 
 class Profile extends Component {
 
@@ -61,7 +60,8 @@ class Profile extends Component {
             </Grid.Column>
             <Grid.Column width={13}>
               <Karma 
-                {...this.props} 
+                {...this.props}
+                users={this.state.users}
               />
             </Grid.Column>
           </Grid.Row>

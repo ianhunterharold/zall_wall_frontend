@@ -32,7 +32,6 @@ class App extends PureComponent {
   captureCurrentUser = (currentUser) => {
     this.setState({currentUser: currentUser })
     localStorage.setItem('currentUser',JSON.stringify(currentUser))
-    // console.log('captureCurrentUser', this.state.currentUser)
   }
 
   selectedUser = (selectedColleague) => {
@@ -41,14 +40,13 @@ class App extends PureComponent {
       selectedColleague: selectedColleague 
       }, ()=> { 
         this.settingSpecificUserInLocalStorage();
-        //setting localstorage after set state is finished
+        //setting localstorage after setstate is finished
       }) 
   }
 
   settingSpecificUserInLocalStorage = () => {
     localStorage.setItem('specificUser', this.state.selectedColleague)
   }
-
 
   render(){
     return (
