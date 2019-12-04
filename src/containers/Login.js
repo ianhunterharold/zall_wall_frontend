@@ -1,11 +1,14 @@
 import React from 'react';
 import { Component } from 'react';
-import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
+import LoginAlert from '../components/LoginAlert';
+// import { NavLink } from 'react-router-dom';
+
 class Login extends Component {
   state ={
     username:'',
-    password:''
+    password:'',
+    loginAlert: false
   }
 
   handleInput = (e) => {
@@ -18,7 +21,17 @@ class Login extends Component {
 
   userLogin = (e) => {
     e.preventDefault()
-    this.verifyUser()
+    let logginInUser = this.props.allUsers.find(user => user.username === this.state.username.toLowerCase())
+    if(!logginInUser){
+      console.log(logginInUser)
+      this.loginUpdateState()
+    } else {
+      this.verifyUser()
+    }
+  }
+
+  loginUpdateState = () => {
+    this.setState({loginAlert:true})
   }
 
   verifyUser = () => {
@@ -36,8 +49,8 @@ class Login extends Component {
     }).then(res => res.json())
       .then (token => {
         localStorage.setItem('token', token.jwt)
+        console.log( localStorage.setItem('token', token.jwt) )
         localStorage.setItem('currentUser', JSON.stringify(token.user))
-        // console.log(localStorage.getItem('currentUser'))
         // this.currentUser(token.user)
         this.loggedIn();
         this.props.history.push('/profile')
@@ -56,6 +69,7 @@ class Login extends Component {
         <Grid textAlign='center' style={{ height: '100vh' }}  veriticalalign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2'color='blue' textAlign='center'>log-in to your account</Header>
+        { this.state.loginAlert ? <LoginAlert /> : null }
         <form size='large' onSubmit={this.userLogin}>  
           <Segment stacked>
           <Form.Input 

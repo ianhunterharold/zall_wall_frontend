@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { Message, Button } from 'semantic-ui-react';
+import { Message } from 'semantic-ui-react';
 
 class Biography extends Component {
 
@@ -15,7 +15,6 @@ class Biography extends Component {
         <Message.Header>Tell us about yourself</Message.Header>
         {JSON.parse(localStorage.getItem('currentUser'))['bio']}
         </Message>
-        
       </div>
     )
   }
