@@ -34,7 +34,6 @@ class SearchedProfile extends Component {
     return sorted.reverse()
   }
 
-
   mapOverKarma = () => {
     return this.newestKarmaOnTop().map( (karma) => {
       return(

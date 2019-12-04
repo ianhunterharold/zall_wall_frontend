@@ -81,9 +81,9 @@ class Login extends Component {
           <Button color='blue' fluid size='large' type='submit'>Login</Button>
           </Segment>
         </form>
-        <Message>
+        {/* <Message>
           New? <NavLink to='/createaccount'>Sign Up</NavLink>   
-        </Message>
+        </Message> */}
         </Grid.Column>
         </Grid>
       </div>

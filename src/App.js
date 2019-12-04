@@ -78,9 +78,9 @@ class App extends PureComponent {
               selectedUser={this.selectedUser}
             />}
           }/>
-          <Route exact path='/createaccount'
+          {/* <Route exact path='/createaccount'
           component={CreateUser} 
-          />
+          /> */}
         </Router>
       </div>
     );
