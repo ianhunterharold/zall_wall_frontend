@@ -31,8 +31,13 @@ class Karma extends Component{
     })
   }
 
+  orderKarmaMostRecentToLeastByTimestamp = () => {
+    let sorted = this.filterKarma().reverse()  
+    return sorted
+  }
+
   mapOverKarma = () => {
-    return this.filterKarma().map((karma) => {
+    return this.orderKarmaMostRecentToLeastByTimestamp().map((karma) => {
       return <KarmaIndividualComment 
       {...this.props}
       key={karma.id}
@@ -52,7 +57,6 @@ class Karma extends Component{
   //     return 'https://react.semantic-ui.com/images/wireframe/image.png';
   //   }
   // }
-
 
   sendKarma = (e) => {
     e.preventDefault()
