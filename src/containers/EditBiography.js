@@ -43,21 +43,16 @@ class EditBiography extends Component {
     localStorage.setItem('currentUser',JSON.stringify(updatedUserObject))
   }
 
-  componentDidMount(){
-    console.log("edit mounted", JSON.parse(localStorage.getItem('currentUser'))['bio'])
-  }
-  
   render(){
     return (
       <div>
         <Form onSubmit={this.handleSubmit} >
           <Message>
-          <Message.Header>Tell Us about Yourself</Message.Header>
-          <TextareaAutosize  inputRef={tag => (this.textarea = tag)} onChange ={(e)=>this.handleUpdatingBio(e)}>
-          {this.state.updatedBioSection}
-          
-          </TextareaAutosize >
-          </Message>
+            <Message.Header>Tell Us about Yourself</Message.Header>
+              <TextareaAutosize  inputRef={tag => (this.textarea = tag)} onChange ={(e)=>this.handleUpdatingBio(e)}>
+                {this.state.updatedBioSection}
+              </TextareaAutosize >
+            </Message>
           <Button className='ui basic button' className='ui right floated button'>Submit Changes</Button>
         </Form>
       </div>
