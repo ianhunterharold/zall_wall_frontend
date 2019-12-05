@@ -23,7 +23,6 @@ class Login extends Component {
     e.preventDefault()
     let logginInUser = this.props.allUsers.find(user => user.username === this.state.username.toLowerCase())
     if(!logginInUser){
-      console.log(logginInUser)
       this.loginUpdateState()
     } else {
       this.verifyUser()

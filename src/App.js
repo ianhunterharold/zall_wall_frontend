@@ -46,13 +46,7 @@ class App extends PureComponent {
 
   settingSpecificUserInLocalStorage = () => {
     localStorage.setItem('specificUser', this.state.selectedColleague)
-    // this.triggerUserIdChange()
   }
-  
-  // triggerUserIdChange = () => {
-  //   console.log('triggerUserIdChange')
-  //   localStorage.setItem('specificUserId',JSON.stringify(this.state.selectedColleague[0]['id']))
-  // }
 
   getAllUsers = () => {
     fetch('http://localhost:3000/api/users')

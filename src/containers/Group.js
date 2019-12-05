@@ -97,6 +97,7 @@ class Group extends Component{
       })
       .then(r => r.json())
       .then((group)=> {
+      // console.log(e.target.innerText) clicking on group and then group throws error.
       this.addNewGroup(group)
       })
       .catch(err => console.log(err))
@@ -143,7 +144,7 @@ class Group extends Component{
     return (
       <div>
         <Dropdown text='Join Group' options={options} value={this.state.value} onChange={(e)=>this.joinGroup(e)} simple item />
-        {this.mapOverGroup()}
+            {this.mapOverGroup()}
       </div>
     )
   }

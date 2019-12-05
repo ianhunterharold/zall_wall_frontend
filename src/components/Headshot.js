@@ -6,10 +6,9 @@ const Headshot =(props) => {
   return (
     props.currentUser ? 
     <div>
-      <Image src={props.currentUser.picture} size='large' rounded/>
-<Header as='h2' block>{JSON.parse(localStorage.getItem('currentUser'))['name']}</Header>
+      <Image src={props.currentUser.picture} className='ui centered medium image' rounded/>
+<Header as='h2' block className='blue'>{JSON.parse(localStorage.getItem('currentUser'))['name']}</Header>
     </div> : window.location.reload() 
-    // if image <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='large' rounded/>
   )
 }
 

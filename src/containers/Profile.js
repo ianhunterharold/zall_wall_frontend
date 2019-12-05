@@ -33,7 +33,6 @@ class Profile extends Component {
   }
 
   editBioFlipStateToFalse = () => {
-
     this.setState({clicked: false})
   }
 

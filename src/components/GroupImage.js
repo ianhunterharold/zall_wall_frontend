@@ -9,7 +9,7 @@ const GroupImage =(props) => {
       <Card>
         <div>
           <Card.Content as='h4'>
-            <Button fluid>
+            <Button fluid className='ui blue basic button'>
               {props.group.name}
             </Button>
           </Card.Content> 

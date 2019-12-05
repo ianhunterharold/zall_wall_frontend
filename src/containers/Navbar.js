@@ -33,8 +33,6 @@ class Navbar extends Component {
     } 
   }
 
-
-
   render(){
 
       const colleagueOptions = [
@@ -47,14 +45,42 @@ class Navbar extends Component {
         {
           key:'Peter Paul',
           text:'Peter Paul',
-          value:'Peter Paul',
-          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+          value:'Peter Paul'
         },
         {
           key:'Melissa Golba',
           text:'Melissa Golba',
-          value:'Melissa Golba',
-          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+          value:'Melissa Golba'
+        },
+        {
+          key:'Elijah Michael',
+          text:'Elijah Michael',
+          value:'Elijah Michael'
+        },
+        {
+          key:'Jacob Hawk',
+          text:'Jacob Hawk',
+          value:'Jacob Hawk'
+        },
+        {
+          key:'Noah Christian',
+          text:'Noah Christian',
+          value:'Noah Christian'
+        },
+        {
+          key:'Kimberly Bleier',
+          text:'Kimberly Bleier',
+          value:'Kimberly Bleier'
+        },
+        {
+          key:'Zeth Harold',
+          text:'Zeth Harold',
+          value:'Zeth Harold'
+        },
+        {
+          key:'Chelsea Blankenship',
+          text:'Chelsea Blankenship',
+          value:'Chelsea Blankenship'
         }
       ]
 

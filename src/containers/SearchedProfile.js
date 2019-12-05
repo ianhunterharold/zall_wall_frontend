@@ -81,13 +81,13 @@ class SearchedProfile extends Component {
         <Card>
           <div>
             <Card.Content as='h4'>
-              <Button fluid>
+              <Button fluid className='ui blue basic button'>
                 {group.name}
               </Button>
             </Card.Content> 
           </div>
             <div>
-              <Image src={group.group_image} />
+              <Image className='ui centered medium image' src={group.group_image} />
             </div>
         </Card>
       </div>
@@ -103,8 +103,6 @@ class SearchedProfile extends Component {
       const specUser = this.findSpecficUser(users)
       this.setState({specificUser: specUser}, ()=> {
         //added callback function so that state could be updated then local storage off of states value.
-        console.log(this.state.specificUser)
-        console.log(localStorage.getItem('specificUserId'))
         localStorage.setItem('specificUserId',JSON.stringify(specUser[0]['id']))
         // going inside of the array, at the first object and targeting the id, not ideal.
       })
@@ -203,10 +201,10 @@ class SearchedProfile extends Component {
           <Grid.Row>
             <Grid.Column width={4}>
             <Image src={this.getImageFromSpecUser()} size='large' rounded/>
-              <Header as='h2' block>{this.mapOverOneUser()}</Header>
+              <Header as='h2' block className='blue'>{this.mapOverOneUser()}</Header>
             </Grid.Column>
             <Grid.Column width={12}>
-              <Message>
+              <Message poistion='centered'>
                 <Message.Header>Tell us about yourself</Message.Header>
                   {this.returnBioSection()}
               </Message>

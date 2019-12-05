@@ -12,7 +12,6 @@ class Biography extends Component {
           <Message>
           <Message.Header>Tell Us about Yourself</Message.Header>
             {this.props.bioSection}
-            {/* {JSON.parse(localStorage.getItem('currentUser'))['bio']} */}
           </Message> 
         </div>
       </div>
