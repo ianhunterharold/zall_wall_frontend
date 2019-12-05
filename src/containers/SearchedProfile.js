@@ -103,8 +103,10 @@ class SearchedProfile extends Component {
       const specUser = this.findSpecficUser(users)
       this.setState({specificUser: specUser}, ()=> {
         //added callback function so that state could be updated then local storage off of states value.
+        console.log(this.state.specificUser)
+        console.log(localStorage.getItem('specificUserId'))
         localStorage.setItem('specificUserId',JSON.stringify(specUser[0]['id']))
-        // going inside of the array, at the first object and targeting the id, not ideal but works for the time being.
+        // going inside of the array, at the first object and targeting the id, not ideal.
       })
     })
   }

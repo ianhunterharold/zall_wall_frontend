@@ -1,14 +1,8 @@
 import React from 'react';
 import { Component } from 'react';
-import { Message, TextArea, Form } from 'semantic-ui-react';
-import EditBiography from './EditBiography'
+import { Message } from 'semantic-ui-react';
 
 class Biography extends Component {
-
-  componentDidMount(){
-    console.log('profile mounted', JSON.parse(localStorage.getItem('currentUser'))['bio'])
-    console.log(this.props.bioSection)
-  }
 
   render(){
     return(

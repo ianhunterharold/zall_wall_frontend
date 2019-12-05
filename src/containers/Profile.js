@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { Grid, toggle } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import Biography from './Biography'
 import Group from './Group';
 import Karma from './Karma';

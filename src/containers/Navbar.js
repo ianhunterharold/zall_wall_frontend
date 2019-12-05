@@ -23,9 +23,14 @@ class Navbar extends Component {
   }
 
   chooseColleague = (e) => {
-    
-    this.props.history.push('/searchedprofile')
-    this.props.selectedUser(e.target.innerText)
+    //names should not be longer than three names, hard coded. Not ideal.
+    let selection = e.target.innerText.split(' ')
+    if (selection.length <= 3){
+      this.props.history.push('/searchedprofile')
+      this.props.selectedUser(e.target.innerText)
+      window.location.reload(); 
+      //antipattern by reloading when new selection happens
+    } 
   }
 
 
@@ -37,19 +42,19 @@ class Navbar extends Component {
           key:'Ian Hunter',
           text:'Ian Hunter',
           value:'Ian Hunter',
-          image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'} not clean for presentation
         },
         {
           key:'Peter Paul',
           text:'Peter Paul',
           value:'Peter Paul',
-          image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
         },
         {
           key:'Melissa Golba',
           text:'Melissa Golba',
           value:'Melissa Golba',
-          image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
+          // image: { avatar: true, src: 'https://react.semantic-ui.com/images/wireframe/image.png'}
         }
       ]
 
