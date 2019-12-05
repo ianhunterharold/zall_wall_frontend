@@ -237,7 +237,7 @@ class SearchedProfile extends Component {
               </Comment.Content>
             </Grid.Column>
           </Grid.Row>
-        </Grid>
+        </Grid>  
       </div>
       </>
     )

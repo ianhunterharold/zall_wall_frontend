@@ -15,7 +15,7 @@ const GroupImage =(props) => {
           </Card.Content> 
         </div>
           <div>
-            <Image src={props.group.group_image}/>
+            <Image size='medium' src={props.group.group_image}/>
           </div>
         <Button circular icon='x' onClick={(e) => props.removeSelfFromGroup(e, props.id)}
         />

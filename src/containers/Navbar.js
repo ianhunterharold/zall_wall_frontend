@@ -25,7 +25,7 @@ class Navbar extends Component {
   chooseColleague = (e) => {
     //names should not be longer than three names, hard coded. Not ideal.
     let selection = e.target.innerText.split(' ')
-    if (selection.length <= 3){
+    if (selection.length <= 3 && e.target.innerText !== JSON.parse(localStorage.getItem('currentUser'))['name'] ){
       this.props.history.push('/searchedprofile')
       this.props.selectedUser(e.target.innerText)
       window.location.reload(); 
@@ -103,7 +103,6 @@ class Navbar extends Component {
             onChange={(e)=>this.chooseColleague(e)}
             options={colleagueOptions} 
           />
-            {/* <Input  icon='search' placeholder='Search for colleagues...'/>  after mvp, will be switching to dynamic search*/}
           </Menu.Item>
           <Menu.Item
             name='logout'
