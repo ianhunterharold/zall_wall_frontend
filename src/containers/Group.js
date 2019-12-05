@@ -116,7 +116,7 @@ class Group extends Component{
     const groupImagesArray = [
       {name: 'Running', grouppicture:'https://i.imgur.com/PVqLlsb.png'},
       {name: 'Cats', grouppicture:'https://i.imgur.com/PQqCbop.png'},
-      {name: 'Dogs', grouppicture:'https://i.imgur.com/62kaaj6.png'},
+      {name: 'Dogs', grouppicture:'https://i.imgur.com/62kaaj6.png?1'},
       {name: 'Yoga', grouppicture:'https://i.imgur.com/JOU9odS.png'},
       {name: 'Sports', grouppicture:'https://i.imgur.com/DwXhyGJ.png'}
     ]
