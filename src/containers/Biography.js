@@ -1,23 +1,31 @@
 import React from 'react';
 import { Component } from 'react';
-import { Message } from 'semantic-ui-react';
+import { Message, TextArea, Form } from 'semantic-ui-react';
+import EditBiography from './EditBiography'
 
 class Biography extends Component {
 
-  editBio = (e) => {
-    console.log("did I click on the entire bio secion?",e)
+  componentDidMount(){
+    console.log('profile mounted', JSON.parse(localStorage.getItem('currentUser'))['bio'])
+    console.log(this.props.bioSection)
   }
 
   render(){
-    return (
-      <div className='biography'  onClick = {(e)=> this.editBio(e)} >
-        <Message>
-        <Message.Header>Tell us about yourself</Message.Header>
-        {JSON.parse(localStorage.getItem('currentUser'))['bio']}
-        </Message>
+    return(
+      <>
+      <div>
+        <div className='biography'>
+          <Message>
+          <Message.Header>Tell Us about Yourself</Message.Header>
+            {this.props.bioSection}
+            {/* {JSON.parse(localStorage.getItem('currentUser'))['bio']} */}
+          </Message> 
+        </div>
       </div>
+      </>
     )
   }
+
 }
 
 export default Biography; 

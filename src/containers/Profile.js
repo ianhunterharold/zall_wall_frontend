@@ -1,15 +1,18 @@
 import React from 'react';
 import { Component } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, toggle } from 'semantic-ui-react';
 import Biography from './Biography'
 import Group from './Group';
 import Karma from './Karma';
 import Headshot from '../components/Headshot';
+import EditBiography from './EditBiography';
 
 class Profile extends Component {
 
   state = {
-    users:[]
+    users:[],
+    bioSection: JSON.parse(localStorage.getItem('currentUser'))['bio'],
+    clicked: false
   }
 
   getAllUsers = () => {
@@ -22,6 +25,21 @@ class Profile extends Component {
     .then(r=>r.json())
     .then(allUsers=> {
       this.setState({users: allUsers })
+    })
+  }
+
+  editBio = (e) => {
+    this.setState({clicked: true})  
+  }
+
+  editBioFlipStateToFalse = () => {
+
+    this.setState({clicked: false})
+  }
+
+  setBio = (newBio) => {
+    this.setState({
+      bioSection: newBio
     })
   }
 
@@ -43,12 +61,22 @@ class Profile extends Component {
               />
             </Grid.Column>
             <Grid.Column width={12}>
+              <div onClick = {this.editBio}>
+              {this.state.clicked ? 
+              <EditBiography 
+              setBio = {this.setBio}
+              clicked={this.state.clicked}
+              editBioFlipStateToFalse={this.editBioFlipStateToFalse}
+              /> 
+              : 
               <Biography 
                 {...this.props} 
                 history={this.props.history}
                 users={this.props.users} 
                 currentUser={this.props.currentUser} 
-              />
+                bioSection={this.state.bioSection}
+              />}
+              </div>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
