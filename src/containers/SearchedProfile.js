@@ -166,7 +166,7 @@ class SearchedProfile extends Component {
   addingToSpecKarma = (newKarma) => {
     this.setState( (previousState) => {
       return {
-      specificKarmas: [...previousState.specificKarmas, newKarma]
+      specificKarmas: [...previousState.specificKarmas, newKarma ]
       }
     })
   }
