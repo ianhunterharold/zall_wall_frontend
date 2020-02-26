@@ -9,5 +9,10 @@ To Install:
 ```
 [login page](https://i.imgur.com/ppROO4Q.png)
 
+```
+5. once at login page, seed data on in server repository has passwords and usernames. 
+to quickly login, use username - ianhunter@gmail.com and password - abcabc 
+```
+
 
 enjoy inspecting my react fundamental understanding. Made with <3
