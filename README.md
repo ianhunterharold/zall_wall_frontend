@@ -10,4 +10,4 @@ To Install:
 [login page](https://i.imgur.com/ppROO4Q.png)
 
 
-Enjoy inspecting my react fundamental understanding. Made with <3
+enjoy inspecting my react fundamental understanding. Made with <3
