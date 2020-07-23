@@ -25,4 +25,4 @@ to quickly login, username - ianhunter@gmail.com and password - abcabc
 ```
 
 
-Enjoy inspecting my react fundamental understanding. Made with <3
+Enjoy inspecting my starting understanding of react project
