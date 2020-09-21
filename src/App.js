@@ -1,11 +1,13 @@
+// @flow
 import React from 'react';
 import './App.css';
 import { PureComponent } from 'react';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Login from './containers/Login' 
 import Profile from './containers/Profile';
 import Navbar from './containers/Navbar';
 import SearchedProfile from './containers/SearchedProfile'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+
 // import CreateUser from './containers/CreateUser';
 
 
