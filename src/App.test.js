@@ -7,3 +7,11 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+// first test on a manual array
+
+const arrEx = ['React Native', 'MeteorJS'];
+
+test('The list of course mentions React Native and MeteorJS', ()=> {
+  expect(['React Native','MeteorJS','React']).toEqual(expect.arrayContaining(arrEx));
+});
