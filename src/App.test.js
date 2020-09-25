@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import data from '../src/dataTest.json';
 
+
+//first test 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
@@ -15,3 +18,7 @@ const arrEx = ['React Native', 'MeteorJS'];
 test('The list of course mentions React Native and MeteorJS', ()=> {
   expect(['React Native','MeteorJS','React']).toEqual(expect.arrayContaining(arrEx));
 });
+
+// const mockUserData = data;
+
+// learning jest 
